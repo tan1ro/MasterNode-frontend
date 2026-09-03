@@ -1,0 +1,390 @@
+.creator-task-page {
+  --creator-task-accent: #b0f900;
+  max-width: 48rem;
+}
+
+.creator-task-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.creator-task-main {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .creator-task-page {
+    max-width: 72rem;
+  }
+
+  .creator-task-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .creator-task-aside {
+    position: sticky;
+    top: 1.5rem;
+    min-width: 0;
+  }
+
+  /* When there are no build steps to show, the aside renders empty —
+     collapse back to a single, comfortably-sized column. */
+  .creator-task-body:has(.creator-task-aside:empty) {
+    display: block;
+    max-width: 48rem;
+  }
+}
+
+.creator-task-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.creator-task-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.creator-task-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  background: color-mix(in srgb, var(--background) 88%, transparent);
+  padding: 0.375rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.creator-task-nav-link:hover {
+  color: var(--foreground);
+  border-color: color-mix(in srgb, var(--creator-task-accent) 35%, transparent);
+  background: color-mix(in srgb, var(--creator-task-accent) 8%, transparent);
+}
+
+.creator-task-nav-link--chat {
+  border-color: color-mix(in srgb, var(--creator-task-accent) 28%, transparent);
+  color: var(--foreground);
+}
+
+.creator-task-hero {
+  border: 1px solid color-mix(in srgb, var(--creator-task-accent) 18%, transparent);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--creator-task-accent) 8%, transparent), transparent 55%),
+    color-mix(in srgb, var(--background) 94%, transparent);
+  padding: 1.25rem 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .creator-task-hero {
+    padding: 1.5rem 1.5rem;
+  }
+}
+
+.creator-task-type-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--creator-task-accent) 30%, transparent);
+  background: color-mix(in srgb, var(--creator-task-accent) 10%, transparent);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+}
+
+.creator-task-chat-return {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--creator-task-accent) 22%, transparent);
+  background: color-mix(in srgb, var(--creator-task-accent) 6%, transparent);
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.creator-task-chat-return:hover {
+  border-color: color-mix(in srgb, var(--creator-task-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--creator-task-accent) 11%, transparent);
+}
+
+.creator-task-chat-return-icon {
+  display: inline-flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--creator-task-accent) 30%, transparent);
+  background: color-mix(in srgb, var(--background) 90%, transparent);
+  color: color-mix(in srgb, var(--creator-task-accent) 85%, var(--foreground));
+}
+
+.creator-task-chat-return-body {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.0625rem;
+}
+
+.creator-task-chat-return-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.creator-task-chat-return-name {
+  overflow: hidden;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--foreground);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.creator-task-chat-return-meta {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.creator-task-chat-return-arrow {
+  flex-shrink: 0;
+  color: var(--muted-foreground);
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.creator-task-chat-return:hover .creator-task-chat-return-arrow {
+  color: color-mix(in srgb, var(--creator-task-accent) 85%, var(--foreground));
+  transform: translateX(2px);
+}
+
+.creator-task-run-card {
+  border: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--muted) 22%, transparent);
+  padding: 1rem 1.25rem;
+}
+
+.creator-task-run-card--active {
+  border-color: color-mix(in srgb, var(--amber) 38%, transparent);
+  background:
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--amber) 10%, transparent), transparent 60%),
+    color-mix(in srgb, var(--muted) 20%, transparent);
+}
+
+.creator-task-run-card--ready {
+  border-color: color-mix(in srgb, var(--emerald) 35%, transparent);
+}
+
+.creator-task-run-card--failed {
+  border-color: color-mix(in srgb, var(--destructive) 35%, transparent);
+  background: color-mix(in srgb, var(--destructive) 6%, transparent);
+}
+
+.creator-task-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.creator-task-section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.creator-task-section-icon {
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  background: color-mix(in srgb, var(--muted) 30%, transparent);
+  color: color-mix(in srgb, var(--creator-task-accent) 85%, var(--foreground));
+}
+
+.creator-task-section-title {
+  font-family: var(--font-heading, inherit);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--foreground);
+}
+
+.creator-task-section-description {
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+.creator-task-section-body {
+  border: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--background) 96%, transparent);
+  padding: 1rem 1.125rem;
+}
+
+.creator-task-prompt-text {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--foreground);
+  white-space: pre-wrap;
+}
+
+.creator-task-llm-usage {
+  border-radius: 0.875rem;
+  border: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+  background: color-mix(in srgb, var(--muted) 14%, transparent);
+  padding: 0.75rem 0.875rem;
+}
+
+.creator-task-llm-usage-title {
+  margin-bottom: 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.creator-task-llm-usage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.creator-task-llm-usage-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.creator-task-llm-usage-head {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.creator-task-llm-usage-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--foreground);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.creator-task-llm-usage-pct {
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.creator-task-llm-usage-bar {
+  height: 0.375rem;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--muted) 45%, transparent);
+}
+
+.creator-task-llm-usage-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--creator-task-accent) 85%, var(--foreground));
+  transition: width 0.4s ease;
+}
+
+.creator-task-deliverable-shell {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.creator-task-deliverable-waiting {
+  border-radius: 1rem;
+  border: 1px dashed color-mix(in srgb, var(--border) 70%, transparent);
+  background: color-mix(in srgb, var(--muted) 16%, transparent);
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+
+.creator-task-summary {
+  border-radius: 0.875rem;
+  border: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+  background: color-mix(in srgb, var(--muted) 14%, transparent);
+  padding: 0.875rem 1rem;
+}
+
+.creator-task-step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.creator-task-step-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-radius: 0.875rem;
+  border: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+  background: color-mix(in srgb, var(--muted) 12%, transparent);
+  padding: 0.75rem 0.875rem;
+}
+
+.creator-task-step-meta {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.375rem;
+}
+
+.creator-task-view-more {
+  width: 100%;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px dashed color-mix(in srgb, var(--border) 70%, transparent);
+  color: var(--muted-foreground);
+}
+
+.creator-task-view-more:hover {
+  color: var(--foreground);
+  border-color: color-mix(in srgb, var(--creator-task-accent) 35%, transparent);
+  background: color-mix(in srgb, var(--creator-task-accent) 6%, transparent);
+}

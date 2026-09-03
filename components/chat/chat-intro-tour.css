@@ -1,0 +1,215 @@
+/* Custom chat walkthrough — no intro.js */
+
+body.mn-chat-tour-open {
+  overflow: hidden;
+}
+
+.mn-chat-tour {
+  position: fixed;
+  inset: 0;
+  /* Root tour layer — card (100003) sits above tour-forced menu (100001). */
+  z-index: 100000;
+  pointer-events: none;
+}
+
+.mn-chat-tour__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  border: 0;
+  background: rgba(5, 5, 8, 0.88);
+  backdrop-filter: blur(3px);
+  pointer-events: auto;
+  cursor: default;
+}
+
+.mn-chat-tour__spotlight {
+  position: fixed;
+  z-index: 100000;
+  border-radius: 14px;
+  border: 2px solid rgba(245, 200, 66, 0.55);
+  box-shadow:
+    0 0 0 9999px rgba(5, 5, 8, 0.88),
+    0 0 32px rgba(45, 207, 207, 0.2);
+  pointer-events: none;
+  transition: all 0.25s ease-out;
+}
+
+.mn-chat-tour__card {
+  position: fixed;
+  /* Above tour-forced composer menu (100001) so step copy stays readable. */
+  z-index: 100003;
+  width: min(30rem, calc(100vw - 2rem));
+  pointer-events: auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245, 200, 66, 0.1) 0%,
+      rgba(45, 207, 207, 0.06) 42%,
+      rgba(123, 94, 167, 0.08) 100%
+    ),
+    rgba(12, 12, 18, 0.98);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  transition: top 0.25s ease-out, left 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.mn-chat-tour__card--center {
+  width: min(32rem, calc(100vw - 2rem));
+}
+
+.mn-chat-tour__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem 0;
+}
+
+.mn-chat-tour__step-label {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.mn-chat-tour__skip {
+  border: 0;
+  background: transparent;
+  padding: 0.2rem 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+  cursor: pointer;
+}
+
+.mn-chat-tour__skip:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.mn-chat-tour__title {
+  margin: 0;
+  padding: 0.5rem 1.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.mn-chat-tour__description {
+  margin: 0.65rem 0 0;
+  padding: 0 1.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.mn-chat-tour__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 1rem 1.5rem 0;
+}
+
+.mn-chat-tour__dot {
+  width: 1.5rem;
+  height: 0.3rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.22);
+  transition: width 0.2s ease, background 0.2s ease;
+}
+
+.mn-chat-tour__dot--active {
+  width: 2.5rem;
+  background: linear-gradient(90deg, #f5c842 0%, #e8703a 35%, #2dcfcf 70%, #7b5ea7 100%);
+}
+
+.mn-chat-tour__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1.1rem 1.5rem 1.35rem;
+  margin-top: 0.15rem;
+}
+
+.mn-chat-tour__next {
+  background: #f5c842 !important;
+  color: #0a0a0f !important;
+  font-weight: 600;
+}
+
+.mn-chat-tour__next:hover {
+  background: #f0c030 !important;
+}
+
+/* Narrow viewports: keep card compact so it doesn't bury the spotlight. */
+.mn-chat-tour__card--mobile {
+  width: min(22rem, calc(100vw - 1.5rem));
+  max-height: min(62dvh, calc(100dvh - 5.5rem));
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 14px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mn-chat-tour__card--mobile.mn-chat-tour__card--center {
+  width: min(24rem, calc(100vw - 1.5rem));
+}
+
+.mn-chat-tour__card--mobile .mn-chat-tour__card-header {
+  padding: 0.95rem 1.1rem 0;
+}
+
+.mn-chat-tour__card--mobile .mn-chat-tour__title {
+  padding: 0.4rem 1.1rem 0;
+  font-size: 1.125rem;
+}
+
+.mn-chat-tour__card--mobile .mn-chat-tour__description {
+  margin-top: 0.45rem;
+  padding: 0 1.1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.mn-chat-tour__card--mobile .mn-chat-tour__dots {
+  padding: 0.85rem 1.1rem 0;
+}
+
+.mn-chat-tour__card--mobile .mn-chat-tour__actions {
+  padding: 0.85rem 1.1rem 1.05rem;
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 18, 0) 0%,
+    rgba(12, 12, 18, 0.96) 28%
+  );
+}
+
+@media (max-width: 1023px) {
+  .mn-chat-tour__spotlight {
+    border-radius: 12px;
+  }
+}
+
+.mn-chat-tour__card--bottom {
+  top: auto !important;
+  max-height: min(52dvh, calc(100dvh - 6rem));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mn-chat-tour__card,
+  .mn-chat-tour__spotlight {
+    transition: none;
+  }
+}
